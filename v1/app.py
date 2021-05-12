@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-import deezer_client as deezer
+from deezer_client import Deezer_Client
+import time
+import os
 
 def main():
-    deezer.open_and_login()
     pass
+
 
 if __name__ == '__main__':
     main()
+    os._exit(0)

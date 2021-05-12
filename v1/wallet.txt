@@ -1,0 +1,5 @@
+username=clement.patrizio@outlook.fr
+pw=
+
+username2=carine.patrizio@gmail.com
+pw2=
