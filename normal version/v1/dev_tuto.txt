@@ -1,0 +1,15 @@
+app_id=
+secret_code=
+redirect_uri=https://github.com/Clem-Pat/Jarvis/blob/main/README.md
+
+
+https://connect.deezer.com/oauth/auth.php?app_id={app_id}&redirect_uri=https://github.com/Clem-Pat/Jarvis/blob/main/README.md
+
+code=
+
+https://connect.deezer.com/oauth/access_token.php?app_id={app_id}&secret={SECRET}&code={CODE}
+
+token=frEIKKOFX3FPjBY6Zg6tDJHVHAqWiVaDcs5BF4dUashv8T5sQVG
+token_info=access_token=frEIKKOFX3FPjBY6Zg6tDJHVHAqWiVaDcs5BF4dUashv8T5sQVG&expires=3600
+
+https://api.deezer.com/oembed?url=https://www.deezer.com/album/302127&autoplay=true&tracklist=true&format=xml
