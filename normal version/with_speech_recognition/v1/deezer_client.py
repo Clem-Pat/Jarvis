@@ -1,8 +1,12 @@
-
 import time
 import os
 import pandas as pd
 import keyboard
+from pynput.keyboard import Key
+from ctypes import cast, POINTER
+from comtypes import CLSCTX_ALL
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+import numpy as np
 
 class Deezer_Client():
     def __init__(self):
@@ -16,20 +20,11 @@ class Deezer_Client():
     def play_playlist(self, playlist='Rock Chill'):
         pass
 
-    def play_pause(self):
+    def play_pause(self, jarvis):
         keyboard.press_and_release('space')
 
-    def next_track(self):
+    def next_track(self, jarvis):
         keyboard.press_and_release('maj+droite')
 
-    def previous_track(self):
+    def previous_track(self, jarvis):
         keyboard.press_and_release('maj+gauche')
-
-    def volume_up(self):
-        keyboard.press_and_release('f8')
-
-    def volume_down(self):
-        keyboard.press_and_release('f7')
-
-    def mute(self):
-        keyboard.press_and_release('f6')
