@@ -1,13 +1,11 @@
 import speech_recognition as sr
-import keyboard
-import time
 import unidecode
-from Volume import Volume
+from volume_manager import Volume_manager
 
 
 class Jarvis():
     def __init__(self):
-        self._volume = Volume()
+        self.volume_manager = Volume_manager()
         self.last_action = None
 
     def listen(self):
@@ -38,10 +36,10 @@ class Jarvis():
         elif 'precedent' in command : deezer_client.previous_track(self)
         elif 'suivant' in command : deezer_client.next_track(self)
         elif 'arrete' in command or 'stop' in command : stop = True
-        elif 'volume' in command or 'son'in command or 'tai' in command: self._volume.manage_volume(self, command)
+        elif 'volume' in command or 'son'in command or 'tai' in command: self.volume_manager.manage_volume(self, command)
         return stop
 
 
-command = 'Coucou quel est le son actuel ?'
-jarvis = Jarvis()
-jarvis.call_the_right_command('deezer_client', command)
+# command = 'Coucou quel est le son actuel ?'
+# jarvis = Jarvis()
+# jarvis.call_the_right_command('deezer_client', command)

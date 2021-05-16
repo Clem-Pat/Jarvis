@@ -1,0 +1,2 @@
+
+- Do last action system to answer to 'encore' command or 'non pas ça' command. Ex : 'monte le son.' + 'encore'

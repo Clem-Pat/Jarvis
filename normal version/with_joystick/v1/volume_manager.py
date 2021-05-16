@@ -2,18 +2,17 @@ from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
-class Volume():
+class Volume_manager():
     def __init__(self):
         devices = AudioUtilities.GetSpeakers()
         interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
         self.volume = cast(interface, POINTER(IAudioEndpointVolume))
 
     def manage_volume(self, jarvis, command):
-        if 'monte' in command :
-            self.get_sound_up()
+        if 'monte' in command : self.get_sound_up()
         elif 'baisse' in command : self.get_sound_down()
         elif 'tai' in command : self.volume.SetMasterVolumeLevel(-65.25, None) #set self to 0
-        elif 'actuel' in command : print(int(self.convert_in_pourcent(self.volume.GetMasterVolumeLevel())))
+        elif 'actuel' in command : print(int(self.convert_in_pourcent(self.volume.GetMasterVolumeLevel()))) #get the current sound
         else : self.set_sound(command)
 
     def convert_in_dB(self, num):
