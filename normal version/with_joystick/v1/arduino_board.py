@@ -2,8 +2,8 @@ import pyfirmata
 import time
 
 class Arduino_board():
-    def __init__(self, usb_port='COM7', analog_pins=[1, 2], digital_pins=[3]):
-        self.port = usb_port
+    def __init__(self, jarvis, usb_port='COM7', analog_pins=[1, 2], digital_pins=[3]):
+        self.port, self.jarvis = usb_port, jarvis
         self.arduinoboard = None
         self.pin = {}
         self.analog_pins, self.digital_pins = analog_pins, digital_pins
@@ -16,6 +16,7 @@ class Arduino_board():
         except:
             self.arduinoboard = None
             print(f'No Arduino board plugged in port {self.port}')
+            self.jarvis.log(f'No Arduino board plugged in port {self.port}')
 
         if self.arduinoboard != None:
             self.iterate = pyfirmata.util.Iterator(self.arduinoboard)

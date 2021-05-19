@@ -5,9 +5,9 @@ from deezer_client import Deezer_Client
 from jarvis import Jarvis
 
 def main():
-    deezer_client = Deezer_Client()
+    deezer_client = Deezer_Client(open=True)
     jarvis = Jarvis()
-    while not keyboard.is_pressed('ctrl'):
+    while not keyboard.is_pressed('delete'):
         command = jarvis.listen()
         if command != None: jarvis.call_the_right_command(deezer_client, command)
 

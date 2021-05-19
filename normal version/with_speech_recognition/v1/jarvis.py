@@ -7,6 +7,7 @@ class Jarvis():
     def __init__(self):
         self.volume_manager = Volume_manager()
         self.last_action = None
+        self.last_command = None
 
     def listen(self):
         recognizer = sr.Recognizer()
@@ -37,9 +38,11 @@ class Jarvis():
         elif 'suivant' in command : deezer_client.next_track(self)
         elif 'arrete' in command or 'stop' in command : stop = True
         elif 'volume' in command or 'son'in command or 'tai' in command: self.volume_manager.manage_volume(self, command)
+        elif 'encore' in command : self.call_the_right_command(deezer_client, self.last_command)
+        self.last_command = command
         return stop
 
-
-# command = 'Coucou quel est le son actuel ?'
+#
+# command = 'Coucou monte le son'
 # jarvis = Jarvis()
 # jarvis.call_the_right_command('deezer_client', command)

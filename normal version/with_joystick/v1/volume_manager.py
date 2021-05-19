@@ -8,7 +8,7 @@ class Volume_manager():
         interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
         self.volume = cast(interface, POINTER(IAudioEndpointVolume))
 
-    def manage_volume(self, jarvis, command):
+    def manage_volume(self, command):
         if 'monte' in command : self.get_sound_up()
         elif 'baisse' in command : self.get_sound_down()
         elif 'tai' in command : self.volume.SetMasterVolumeLevel(-65.25, None) #set self to 0
