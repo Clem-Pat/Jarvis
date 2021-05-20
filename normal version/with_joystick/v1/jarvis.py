@@ -3,17 +3,19 @@ import keyboard
 from win10toast import ToastNotifier
 from volume_manager import Volume_manager
 from arduino_board import Arduino_board
+from console import tkinterWindow
 
 class Jarvis():
     def __init__(self):
+        self.console = tkinterWindow(auto_unfocus=False)
         self.arduinoboard = Arduino_board(self)
         self.volume_manager = Volume_manager()
         self.command_wanted, self.last_loop_action, self.start_play_asked = None, None, None
         self.last_command = None
 
-    def log(self, text):
+    def notif(self, text):
         toast = ToastNotifier()
-        toast.show_toast("Jarvis",text,duration=20,icon_path='normal version/jarvis_icon.ico')
+        toast.show_toast("Jarvis",text,duration=20,icon_path='normal version/Ressources/jarvis_icon.ico')
         while toast.notification_active(): time.sleep(0.1)
 
     def listen(self):

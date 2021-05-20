@@ -16,7 +16,7 @@ class Arduino_board():
         except:
             self.arduinoboard = None
             print(f'No Arduino board plugged in port {self.port}')
-            self.jarvis.log(f'No Arduino board plugged in port {self.port}')
+            # self.jarvis.notif(f'No Arduino board plugged in port {self.port}')
 
         if self.arduinoboard != None:
             self.iterate = pyfirmata.util.Iterator(self.arduinoboard)
