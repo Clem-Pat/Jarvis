@@ -3,7 +3,8 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
 class Volume_manager():
-    def __init__(self):
+    def __init__(self, jarvis):
+        self.jarvis = jarvis
         devices = AudioUtilities.GetSpeakers()
         interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
         self.volume = cast(interface, POINTER(IAudioEndpointVolume))
@@ -11,8 +12,8 @@ class Volume_manager():
     def manage_volume(self, command):
         if 'monte' in command : self.get_sound_up()
         elif 'baisse' in command : self.get_sound_down()
-        elif 'tai' in command : self.volume.SetMasterVolumeLevel(-65.25, None) #set self to 0
-        elif 'actuel' in command : print(int(self.convert_in_pourcent(self.volume.GetMasterVolumeLevel()))) #get the current sound
+        elif 'tai' in command : self.mute()
+        elif 'actuel' in command : self.get_current_sound()
         else : self.set_sound(command)
 
     def convert_in_dB(self, num):
@@ -28,24 +29,34 @@ class Volume_manager():
     def set_sound(self, command="Volume : 11%"):
         if any(i.isdigit() for i in command):
             num = int(''.join([i for i in list(command) if i.isdigit()]))
-            print(num)
             p=self.convert_in_dB(num)
             self.volume.SetMasterVolumeLevel(p, None)
+            self.jarvis.log(f'J: Je mets le son à {num}%')
 
     def get_sound_up(self):
         current_volume = self.convert_in_pourcent(self.volume.GetMasterVolumeLevel())
         volume_wanted = self.convert_in_dB(current_volume+10)
         if volume_wanted < 0:
             self.volume.SetMasterVolumeLevel(volume_wanted, None)
+            self.jarvis.log('J: Je monte le son')
         else:
             self.volume.SetMasterVolumeLevel(0, None)
-            print('Volume at 100%')
+            self.jarvis.log('J: Le son est au max')
 
     def get_sound_down(self):
         current_volume = self.convert_in_pourcent(self.volume.GetMasterVolumeLevel())
         volume_wanted = self.convert_in_dB(current_volume-10)
         if volume_wanted > -65.25:
             self.volume.SetMasterVolumeLevel(volume_wanted, None)
+            self.jarvis.log('J: Je baisse le son')
         else:
             self.volume.SetMasterVolumeLevel(-65.25, None)
-            print('Volume at 0')
+            self.jarvis.log('J: Le son est au min')
+
+    def mute(self):
+        self.volume.SetMasterVolumeLevel(-65.25, None) #set self to 0
+        self.jarvis.log(f'J: Je me tais')
+
+    def get_current_sound(self):
+        vol = int(self.convert_in_pourcent(self.volume.GetMasterVolumeLevel()))
+        self.jarvis.log(f'J: Le son est à {vol}%')

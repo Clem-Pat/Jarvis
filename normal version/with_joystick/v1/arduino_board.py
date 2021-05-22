@@ -2,7 +2,7 @@ import pyfirmata
 import time
 
 class Arduino_board():
-    def __init__(self, jarvis, usb_port='COM7', analog_pins=[1, 2], digital_pins=[3]):
+    def __init__(self, jarvis, usb_port='COM7', analog_pins=[0, 1, 2], digital_pins=[3]):
         self.port, self.jarvis = usb_port, jarvis
         self.arduinoboard = None
         self.pin = {}
@@ -13,10 +13,11 @@ class Arduino_board():
         try:
             self.arduinoboard = pyfirmata.Arduino(self.port)
             print(f'Arduino board plugged in port {self.port}')
+            self.jarvis.log(f'Arduino board plugged in port {self.port}', type='arduino')
         except:
             self.arduinoboard = None
             print(f'No Arduino board plugged in port {self.port}')
-            # self.jarvis.notif(f'No Arduino board plugged in port {self.port}')
+            self.jarvis.log(f'No Arduino board plugged in port {self.port}', type='arduino')
 
         if self.arduinoboard != None:
             self.iterate = pyfirmata.util.Iterator(self.arduinoboard)
@@ -30,9 +31,7 @@ class Arduino_board():
                 time.sleep(0.5)
 
             for j in self.digital_pins:
-                if j in self.pwm_pins: self.pin["d" + str(j)] = self.arduinoboard.get_pin('d:' + str(j) + ':p')
-                elif j in self.servo_pins: self.pin["d" + str(j)] = self.arduinoboard.get_pin('d:' + str(j) + ':s')
-                else: self.pin["d" + str(j)] = self.arduinoboard.get_pin('d:' + str(j) + ':i') #i comme input ou o comme output ?
+                self.pin["d" + str(j)] = self.arduinoboard.get_pin('d:' + str(j) + ':i') #i comme input ou o comme output ?
                 self.pin["d" + str(j)].value = None
         else:
             for i in self.analog_pins: self.pin["A" + str(i)] = None
