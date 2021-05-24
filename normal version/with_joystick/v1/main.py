@@ -13,9 +13,6 @@ def main():
         jarvis.console.refresh()
     jarvis.console.kill_console()
     os._exit(0)
-    
+
 if __name__ == '__main__':
     main()
-
-#TODO : know if there was an error (to display it on console)
-#TODO

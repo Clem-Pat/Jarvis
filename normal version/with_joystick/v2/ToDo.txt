@@ -1,0 +1,5 @@
+
+
+
+TODO : Bluetooth version
+TODO : long term : click on one button to open all
