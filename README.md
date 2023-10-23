@@ -1,9 +1,12 @@
 # Jarvis
 
-#What is it : 
-Jarvis is an assistant that allows you to control your Spotify or Deezer music via a joystick or your voice (the voice version doesn't work very well and is not finished) 
+## What is it : 
+Jarvis is an assistant that allows you to control your Spotify or Deezer music via a joystick or your voice (the voice controlled version shows failures and is not finished) 
+This is a crossover project with Arduino and Python. 
+The actual version uses the keyboard control but a new version using the Deezer and Spotify API is coming up. 
+Thus, a User Interface will also be built up. 
 
-#How to : 
+## How to run : 
 Plug in an arduino uno with StandardFirmata on it and a joystick plugged like this : 
   X axis : A0
   Y axis : A1
@@ -11,5 +14,5 @@ Plug in an arduino uno with StandardFirmata on it and a joystick plugged like th
 Enter the Serial USB port name in Jarvis/with joystick/v2
 Run main file of this folder. 
 
-#TODO : 
+## TODO : 
 make a bluetooth version to remotely control the music. 
